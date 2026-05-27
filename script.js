@@ -1,10 +1,10 @@
 const SERVICES = [
-    { id: "pickup", name: "Pickup Service", rate: 200000 },
-    { id: "storage", name: "Storage (per month)", rate: 295000 },
-    { id: "purchase-boxes", name: "Purchase Storage Boxes", rate: 828000 },
-    { id: "rental-boxes", name: "Rental Storage Boxes/Month", rate: 85000 },
-    { id: "delivery", name: "Delivery Service", rate: 200000 },
-    { id: "lock", name: "Lock Service", rate: 50000 }
+    { id: "pickup", name: "Pickup Service", rate: 200000, inputType: "checkbox" },
+    { id: "storage", name: "Storage (monthly)", rate: 295000, inputType: "hidden" },
+    { id: "purchase-boxes", name: "Purchase Storage Boxes", rate: 828000, inputType: "number" },
+    { id: "rental-boxes", name: "Rental Storage Boxes/Month", rate: 85000, inputType: "number" },
+    { id: "delivery", name: "Delivery Service", rate: 200000, inputType: "checkbox" },
+    { id: "lock", name: "Lock Service", rate: 50000, inputType: "checkbox" }
 ];
 
 function monthsBetween(d1, d2) {
@@ -24,14 +24,15 @@ function formatVND(amount) {
 function initForm() {
     const container = document.getElementById('services-container');
     SERVICES.forEach(s => {
+        if (s.inputType === 'hidden') return;
         const div = document.createElement('div');
         div.className = 'service-row';
         div.innerHTML = `
-            <div class="service-info">
-                <span class="service-name">${s.name}</span>
-                <span class="service-rate">${formatVND(s.rate)}</span>
-            </div>
-            <input type="number" class="qty-input" id="qty-${s.id}" name="qty-${s.id}" data-rate="${s.rate}" min="0" value="0" placeholder="0">
+            <span>${s.name} (${formatVND(s.rate)})</span>
+            ${s.inputType === 'checkbox' ? 
+              `<input type="checkbox" id="qty-${s.id}" name="qty-${s.id}" data-rate="${s.rate}">` :
+              `<input type="number" class="qty-input" id="qty-${s.id}" name="qty-${s.id}" data-rate="${s.rate}" min="0" value="0" placeholder="0">`
+            }
         `;
         container.appendChild(div);
     });
@@ -42,7 +43,7 @@ function calculate() {
     const dateOut = document.getElementById('date-out').value;
     const months = monthsBetween(dateIn, dateOut);
     
-    let gross = 100000; // Automatic: Check-in (50k) + Check-out (50k)
+    let gross = 100000; // Mandatory Check-in (50k) + Check-out (50k)
 
     // Storage
     gross += months * 295000;
@@ -50,15 +51,21 @@ function calculate() {
     // Optional fees
     SERVICES.forEach(s => {
         if (s.id === 'storage') return;
-        const qty = parseInt(document.getElementById(`qty-${s.id}`).value) || 0;
-        gross += qty * s.rate;
+        const el = document.getElementById(`qty-${s.id}`);
+        let cost = 0;
+        if (s.inputType === 'checkbox') {
+            cost = el.checked ? s.rate : 0;
+        } else {
+            cost = (parseInt(el.value) || 0) * s.rate;
+        }
+        gross += cost;
     });
 
     // Discount
     const coupon = document.getElementById('coupon').value;
     const discount = (coupon === 'Bob15') ? gross * 0.15 : 0;
     const net = gross - discount;
-    const balance = net - 500000; // Fixed deposit
+    const balance = net - 500000; // Fixed deposit display
 
     document.getElementById('gross').textContent = formatVND(gross);
     document.getElementById('discount').textContent = '- ' + formatVND(discount);
@@ -68,6 +75,6 @@ function calculate() {
 
 document.addEventListener('DOMContentLoaded', () => {
     initForm();
-    document.querySelectorAll('input').forEach(i => i.addEventListener('input', calculate));
+    document.querySelectorAll('input, select, textarea').forEach(i => i.addEventListener('input', calculate));
     calculate();
 });

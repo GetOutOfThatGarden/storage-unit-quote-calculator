@@ -1,50 +1,8 @@
 [
-  {
-    "id": "check-in",
-    "name": "Check-in Service",
-    "rate": 50000,
-    "type": "automatic"
-  },
-  {
-    "id": "pickup",
-    "name": "Pickup Service",
-    "rate": 200000,
-    "type": "optional"
-  },
-  {
-    "id": "storage",
-    "name": "Storage (per month)",
-    "rate": 295000,
-    "type": "required"
-  },
-  {
-    "id": "purchase-boxes",
-    "name": "Purchase Storage Boxes",
-    "rate": 828000,
-    "type": "optional"
-  },
-  {
-    "id": "rental-boxes",
-    "name": "Rental Storage Boxes/Month",
-    "rate": 85000,
-    "type": "optional"
-  },
-  {
-    "id": "check-out",
-    "name": "Check-out Service",
-    "rate": 50000,
-    "type": "automatic"
-  },
-  {
-    "id": "delivery",
-    "name": "Delivery Service",
-    "rate": 200000,
-    "type": "optional"
-  },
-  {
-    "id": "lock",
-    "name": "Lock Service",
-    "rate": 50000,
-    "type": "optional"
-  }
+  { "id": "pickup", "name": "Pickup Service", "rate": 200000, "inputType": "checkbox" },
+  { "id": "storage", "name": "Storage (monthly)", "rate": 295000, "inputType": "hidden" },
+  { "id": "purchase-boxes", "name": "Purchase Storage Boxes", "rate": 828000, "inputType": "number" },
+  { "id": "rental-boxes", "name": "Rental Storage Boxes/Month", "rate": 85000, "inputType": "number" },
+  { "id": "delivery", "name": "Delivery Service", "rate": 200000, "inputType": "checkbox" },
+  { "id": "lock", "name": "Lock Service", "rate": 50000, "inputType": "checkbox" }
 ]

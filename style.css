@@ -1,17 +1,15 @@
-.submit-btn {
+textarea {
     width: 100%;
-    padding: 14px;
-    background: #0f3460;
-    color: #fff;
-    border: none;
+    padding: 12px;
+    border: 1.5px solid #dee2e6;
     border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background 0.2s;
+    font-size: 0.95rem;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 100px;
+    background: #fafbfc;
 }
-
-.submit-btn:hover {
-    background: #1a1a2e;
+textarea:focus {
+    outline: none;
+    border-color: #0f3460;
 }
