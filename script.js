@@ -28,9 +28,12 @@ function initForm() {
         const div = document.createElement('div');
         div.className = 'service-row';
         div.innerHTML = `
-            <span>${s.name} (${formatVND(s.rate)})</span>
+            <div class="service-info">
+                <span class="service-name">${s.name}</span>
+                <span class="service-rate">${formatVND(s.rate)}</span>
+            </div>
             ${s.inputType === 'checkbox' ? 
-              `<input type="checkbox" id="qty-${s.id}" name="qty-${s.id}" data-rate="${s.rate}">` :
+              `<input type="checkbox" id="qty-${s.id}" name="qty-${s.id}" data-rate="${s.rate}" value="1">` :
               `<input type="number" class="qty-input" id="qty-${s.id}" name="qty-${s.id}" data-rate="${s.rate}" min="0" value="0" placeholder="0">`
             }
         `;
@@ -65,7 +68,7 @@ function calculate() {
     const coupon = document.getElementById('coupon').value;
     const discount = (coupon === 'Bob15') ? gross * 0.15 : 0;
     const net = gross - discount;
-    const balance = net - 500000; // Fixed deposit display
+    const balance = net - 500000; // Fixed deposit
 
     document.getElementById('gross').textContent = formatVND(gross);
     document.getElementById('discount').textContent = '- ' + formatVND(discount);
