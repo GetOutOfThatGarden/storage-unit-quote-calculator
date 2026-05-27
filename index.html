@@ -30,81 +30,14 @@
 
             <div class="section">
                 <h2>Services</h2>
-                <p class="section-note">Enter the quantities you need for each service.</p>
-
-                <div class="service-row">
-                    <div class="service-info">
-                        <span class="service-name">Check-in Service</span>
-                        <span class="service-rate">150,000 ₫ <small>one-time</small></span>
-                    </div>
-                    <input type="number" class="qty-input" data-rate="150000" min="0" value="0" placeholder="Qty">
-                </div>
-
-                <div class="service-row">
-                    <div class="service-info">
-                        <span class="service-name">Pickup Service</span>
-                        <span class="service-rate">100,000 ₫ <small>one-time</small></span>
-                    </div>
-                    <input type="number" class="qty-input" data-rate="100000" min="0" value="0" placeholder="Qty">
-                </div>
-
                 <div class="service-row highlight">
                     <div class="service-info">
-                        <span class="service-name">Storage</span>
-                        <span class="service-rate">300,000 ₫ <small>per month</small></span>
-                    </div>
-                    <div class="storage-detail">
-                        <span id="storage-months-display">0 months</span>
-                        <span class="storage-amount" id="storage-line-total">0 ₫</span>
+                        <span class="service-name" id="storage-display">Storage</span>
+                        <span class="service-rate">295,000 ₫ <small>per month</small></span>
                     </div>
                 </div>
-
-                <div class="service-row">
-                    <div class="service-info">
-                        <span class="service-name">Box Purchase</span>
-                        <span class="service-rate">80,000 ₫ <small>per box</small></span>
-                    </div>
-                    <input type="number" class="qty-input" data-rate="80000" min="0" value="0" placeholder="Qty">
-                </div>
-
-                <div class="service-row">
-                    <div class="service-info">
-                        <span class="service-name">Box Rental</span>
-                        <span class="service-rate">30,000 ₫ <small>per box</small></span>
-                    </div>
-                    <input type="number" class="qty-input" data-rate="30000" min="0" value="0" placeholder="Qty">
-                </div>
-
-                <div class="service-row">
-                    <div class="service-info">
-                        <span class="service-name">Check-out Service</span>
-                        <span class="service-rate">150,000 ₫ <small>one-time</small></span>
-                    </div>
-                    <input type="number" class="qty-input" data-rate="150000" min="0" value="0" placeholder="Qty">
-                </div>
-
-                <div class="service-row">
-                    <div class="service-info">
-                        <span class="service-name">Delivery Service</span>
-                        <span class="service-rate">100,000 ₫ <small>one-time</small></span>
-                    </div>
-                    <input type="number" class="qty-input" data-rate="100000" min="0" value="0" placeholder="Qty">
-                </div>
-
-                <div class="service-row">
-                    <div class="service-info">
-                        <span class="service-name">Lock Service</span>
-                        <span class="service-rate">50,000 ₫ <small>one-time</small></span>
-                    </div>
-                    <input type="number" class="qty-input" data-rate="50000" min="0" value="0" placeholder="Qty">
-                </div>
-            </div>
-
-            <div class="section">
-                <h2>Promo Code</h2>
-                <div class="form-group">
-                    <input type="text" id="promo-input" value="BOB15" placeholder="Enter promo code">
-                    <span class="promo-badge active">15% OFF</span>
+                <div id="services-container">
+                    <!-- Dynamic services injected here -->
                 </div>
             </div>
 
