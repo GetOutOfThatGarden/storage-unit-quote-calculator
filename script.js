@@ -1,12 +1,10 @@
 const SERVICES = [
-    { id: "check-in", name: "Check-in Service", rate: 50000, type: "automatic" },
-    { id: "pickup", name: "Pickup Service", rate: 200000, type: "optional" },
-    { id: "storage", name: "Storage (per month)", rate: 295000, type: "required" },
-    { id: "purchase-boxes", name: "Purchase Storage Boxes", rate: 828000, type: "optional" },
-    { id: "rental-boxes", name: "Rental Storage Boxes/Month", rate: 85000, type: "optional" },
-    { id: "check-out", name: "Check-out Service", rate: 50000, type: "automatic" },
-    { id: "delivery", name: "Delivery Service", rate: 200000, type: "optional" },
-    { id: "lock", name: "Lock Service", rate: 50000, type: "optional" }
+    { id: "pickup", name: "Pickup Service", rate: 200000 },
+    { id: "storage", name: "Storage (per month)", rate: 295000 },
+    { id: "purchase-boxes", name: "Purchase Storage Boxes", rate: 828000 },
+    { id: "rental-boxes", name: "Rental Storage Boxes/Month", rate: 85000 },
+    { id: "delivery", name: "Delivery Service", rate: 200000 },
+    { id: "lock", name: "Lock Service", rate: 50000 }
 ];
 
 function monthsBetween(d1, d2) {
@@ -26,8 +24,6 @@ function formatVND(amount) {
 function initForm() {
     const container = document.getElementById('services-container');
     SERVICES.forEach(s => {
-        if (s.type === 'automatic') return; // Handled in calc
-
         const div = document.createElement('div');
         div.className = 'service-row';
         div.innerHTML = `
@@ -35,7 +31,7 @@ function initForm() {
                 <span class="service-name">${s.name}</span>
                 <span class="service-rate">${formatVND(s.rate)}</span>
             </div>
-            <input type="number" class="qty-input" id="qty-${s.id}" data-id="${s.id}" min="0" value="0" placeholder="Qty">
+            <input type="number" class="qty-input" id="qty-${s.id}" name="qty-${s.id}" data-rate="${s.rate}" min="0" value="0" placeholder="0">
         `;
         container.appendChild(div);
     });
@@ -46,31 +42,28 @@ function calculate() {
     const dateOut = document.getElementById('date-out').value;
     const months = monthsBetween(dateIn, dateOut);
     
-    let gross = 0;
+    let gross = 100000; // Automatic: Check-in (50k) + Check-out (50k)
 
-    // Automatic fees
-    gross += 50000; // Check-in
-    gross += 50000; // Check-out
-
-    // Storage (required)
+    // Storage
     gross += months * 295000;
-    document.getElementById('storage-display').textContent = `Storage (${months} months)`;
 
     // Optional fees
-    SERVICES.filter(s => s.type === 'optional').forEach(s => {
+    SERVICES.forEach(s => {
+        if (s.id === 'storage') return;
         const qty = parseInt(document.getElementById(`qty-${s.id}`).value) || 0;
         gross += qty * s.rate;
     });
 
-    const discount = gross * 0.15;
+    // Discount
+    const coupon = document.getElementById('coupon').value;
+    const discount = (coupon === 'Bob15') ? gross * 0.15 : 0;
     const net = gross - discount;
-    const deposit = parseInt(document.getElementById('deposit').value) || 0;
-    const balance = net - deposit;
+    const balance = net - 500000; // Fixed deposit
 
     document.getElementById('gross').textContent = formatVND(gross);
     document.getElementById('discount').textContent = '- ' + formatVND(discount);
     document.getElementById('net').textContent = formatVND(net);
-    document.getElementById('balance').textContent = formatVND(balance);
+    document.getElementById('balance').textContent = formatVND(Math.max(0, balance));
 }
 
 document.addEventListener('DOMContentLoaded', () => {

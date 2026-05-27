@@ -10,64 +10,74 @@
     <div class="container">
         <div class="header">
             <h1>Bamboo Bob's Storage</h1>
-            <p class="subtitle">Da Nang, Vietnam — Instant Quote Calculator</p>
+            <p class="subtitle">Da Nang, Vietnam — Quote Request</p>
         </div>
 
-        <form id="quote-form">
+        <form id="quote-form" action="https://formspree.io/f/mqkrvwzk" method="POST">
+            <div class="section">
+                <h2>Customer Details</h2>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+            </div>
+
             <div class="section">
                 <h2>Storage Period</h2>
                 <div class="row">
                     <div class="form-group">
                         <label for="date-in">Move-in Date</label>
-                        <input type="date" id="date-in">
+                        <input type="date" id="date-in" name="date-in" required>
                     </div>
                     <div class="form-group">
                         <label for="date-out">Move-out Date</label>
-                        <input type="date" id="date-out">
+                        <input type="date" id="date-out" name="date-out" required>
                     </div>
                 </div>
             </div>
 
             <div class="section">
                 <h2>Services</h2>
-                <div class="service-row highlight">
+                <div class="service-row automatic">
                     <div class="service-info">
-                        <span class="service-name" id="storage-display">Storage</span>
-                        <span class="service-rate">295,000 ₫ <small>per month</small></span>
+                        <span class="service-name">Check-in Fee</span>
+                        <span class="service-rate">50,000 ₫</span>
                     </div>
                 </div>
-                <div id="services-container">
-                    <!-- Dynamic services injected here -->
+                <div id="services-container"></div>
+                <div class="service-row automatic">
+                    <div class="service-info">
+                        <span class="service-name">Check-out Fee</span>
+                        <span class="service-rate">50,000 ₫</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Coupon</h2>
+                <div class="form-group">
+                    <input type="text" id="coupon" name="coupon" placeholder="Enter coupon code (e.g., Bob15)">
                 </div>
             </div>
 
             <div class="section">
                 <h2>Your Quote</h2>
                 <div class="totals">
-                    <div class="total-row">
-                        <span>Gross Invoice</span>
-                        <span id="gross">0 ₫</span>
-                    </div>
-                    <div class="total-row discount">
-                        <span>Promo Discount (15%)</span>
-                        <span id="discount">-0 ₫</span>
-                    </div>
-                    <div class="total-row net">
-                        <span>Net Invoice</span>
-                        <span id="net">0 ₫</span>
-                    </div>
-                    <div class="total-row">
-                        <span>Deposit Paid</span>
-                        <input type="number" id="deposit" min="0" value="0" placeholder="0">
-                    </div>
-                    <div class="total-row balance">
-                        <span>Balance at Pickup/Delivery</span>
-                        <span id="balance">0 ₫</span>
-                    </div>
+                    <div class="total-row"><span>Gross Invoice</span><span id="gross">0 ₫</span></div>
+                    <div class="total-row discount"><span>Discount</span><span id="discount">-0 ₫</span></div>
+                    <div class="total-row net"><span>Net Invoice</span><span id="net">0 ₫</span></div>
+                    <div class="total-row"><span>Required Deposit</span><span>500,000 ₫</span></div>
+                    <div class="total-row balance"><span>Balance at Pickup</span><span id="balance">0 ₫</span></div>
                 </div>
             </div>
-
-            <p class="disclaimer">This is an instant estimate. Final pricing confirmed upon booking.</p>
+            
+            <button type="submit" class="submit-btn">Request Quote</button>
         </form>
     </div>
     <script src="script.js"></script>
