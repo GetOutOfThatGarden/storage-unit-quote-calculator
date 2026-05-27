@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage Unit Quote Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Quote Calculator</h1>
+        <form id="quote-form">
+            <div class="form-group">
+                <label for="rate">Rate per unit ($):</label>
+                <input type="number" id="rate" name="rate" required>
+            </div>
+            <div class="form-group">
+                <label for="qty">Quantity:</label>
+                <input type="number" id="qty" name="qty" required>
+            </div>
+            <div class="form-group">
+                <label for="deposit">Deposit ($):</label>
+                <input type="number" id="deposit" name="deposit" required>
+            </div>
+            <button type="button" id="calculate-btn">Calculate</button>
+        </form>
+        <div id="results">
+            <p>Gross: <span id="gross">0</span></p>
+            <p>Discount (15%): <span id="discount">0</span></p>
+            <p>Net: <span id="net">0</span></p>
+            <p>Balance: <span id="balance">0</span></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
