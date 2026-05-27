@@ -1,12 +1,10 @@
 # Roadmap
 
-## Phase 1: Calculator MVP
+### Phase 01: Calculator MVP
 **Goal:** Functional quote calculator with correct logic.
-**Mode:** mvp
-**Success Criteria**:
-1. All service inputs map to correct rates.
-2. Math calculations match the defined requirements (Gross -> Discount -> Net -> Balance).
-3. Responsive UI.
+**Requirements:** [CALC-01, CALC-02, CALC-03]
+**Plans:** 2 plans
 
----
-*Last updated: 2026-05-27*
+Plans:
+- [ ] 01-01-PLAN.md — Setup foundation (HTML/CSS)
+- [ ] 01-02-PLAN.md — Implement logic and verification (JS)
