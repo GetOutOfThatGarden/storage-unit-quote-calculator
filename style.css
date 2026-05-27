@@ -151,6 +151,46 @@ textarea.form-control {
     font-size: 1rem;
 }
 
+.coupon-row {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+}
+
+.coupon-row .form-control {
+    flex: 1;
+}
+
+.validate-btn {
+    padding: 10px 20px;
+    background: #0f3460;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.validate-btn:hover {
+    background: #1a1a2e;
+}
+
+#coupon-status {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+#coupon-status.valid {
+    color: #28a745;
+}
+
+#coupon-status.invalid {
+    color: #dc3545;
+}
+
 .submit-btn {
     width: 100%;
     padding: 14px;
@@ -162,4 +202,8 @@ textarea.form-control {
     font-weight: 600;
     cursor: pointer;
     margin-top: 20px;
+}
+
+.submit-btn:hover {
+    background: #1a1a2e;
 }

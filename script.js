@@ -7,6 +7,8 @@ const SERVICES = [
     { id: "lock", name: "Lock Service", rate: 50000, inputType: "checkbox" }
 ];
 
+let couponValidated = false;
+
 function monthsBetween(d1, d2) {
     const start = new Date(d1);
     const end = new Date(d2);
@@ -41,6 +43,31 @@ function initForm() {
     });
 }
 
+function validateCoupon() {
+    const input = document.getElementById('coupon');
+    const status = document.getElementById('coupon-status');
+    const code = input.value.trim();
+
+    if (!code) {
+        status.textContent = '';
+        status.className = '';
+        couponValidated = false;
+        calculate();
+        return;
+    }
+
+    if (code === 'BOB15') {
+        status.textContent = '✓ Coupon applied! 15% discount';
+        status.className = 'valid';
+        couponValidated = true;
+    } else {
+        status.textContent = '✗ Invalid coupon code';
+        status.className = 'invalid';
+        couponValidated = false;
+    }
+    calculate();
+}
+
 function calculate() {
     const dateIn = document.getElementById('date-in').value;
     const dateOut = document.getElementById('date-out').value;
@@ -48,10 +75,8 @@ function calculate() {
     
     let gross = 100000; // Mandatory Check-in (50k) + Check-out (50k)
 
-    // Storage
     gross += months * 295000;
 
-    // Optional fees
     SERVICES.forEach(s => {
         if (s.id === 'storage') return;
         const el = document.getElementById(`qty-${s.id}`);
@@ -64,11 +89,9 @@ function calculate() {
         gross += cost;
     });
 
-    // Discount
-    const coupon = document.getElementById('coupon').value;
-    const discount = (coupon === 'Bob15') ? gross * 0.15 : 0;
+    const discount = couponValidated ? gross * 0.15 : 0;
     const net = gross - discount;
-    const balance = net - 500000; // Fixed deposit
+    const balance = net - 500000;
 
     document.getElementById('gross').textContent = formatVND(gross);
     document.getElementById('discount').textContent = '- ' + formatVND(discount);
@@ -78,6 +101,17 @@ function calculate() {
 
 document.addEventListener('DOMContentLoaded', () => {
     initForm();
-    document.querySelectorAll('input, select, textarea').forEach(i => i.addEventListener('input', calculate));
+    document.querySelectorAll('input, select, textarea').forEach(i => {
+        if (i.id !== 'coupon') {
+            i.addEventListener('input', calculate);
+        }
+    });
+    document.getElementById('validate-btn').addEventListener('click', validateCoupon);
+    document.getElementById('coupon').addEventListener('input', () => {
+        couponValidated = false;
+        document.getElementById('coupon-status').textContent = '';
+        document.getElementById('coupon-status').className = '';
+        calculate();
+    });
     calculate();
 });

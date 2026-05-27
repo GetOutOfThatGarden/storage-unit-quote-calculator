@@ -44,7 +44,11 @@
 
             <div class="section">
                 <h2>Coupon</h2>
-                <div class="form-group"><input type="text" class="form-control" id="coupon" name="coupon" placeholder="Enter coupon code (e.g., Bob15)"></div>
+                <div class="coupon-row">
+                    <input type="text" class="form-control" id="coupon" name="coupon" placeholder="Enter coupon code">
+                    <button type="button" id="validate-btn" class="validate-btn">Validate</button>
+                </div>
+                <div id="coupon-status"></div>
             </div>
 
             <div class="section">
